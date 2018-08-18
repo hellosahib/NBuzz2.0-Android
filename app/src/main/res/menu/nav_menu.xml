@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:menuCategory="container"
+        android:checkableBehavior="single">
+        <item
+            android:title="Games"
+            android:id="@+id/gamesMenu"
+            android:icon="@drawable/ic_favorite_black"/>
+        <item
+            android:title="Social"
+            android:id="@+id/socialMenu"
+            android:icon="@drawable/ic_favorite_black"/>
+    </group>
+    <item
+        android:title="Settings"
+        android:id="@+id/settingsMenu"
+        android:icon="@drawable/ic_settings_black"
+        />
+</menu>

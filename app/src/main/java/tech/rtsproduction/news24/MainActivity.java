@@ -3,10 +3,17 @@ package tech.rtsproduction.news24;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -25,8 +32,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     ProgressBar progressBar;
     TextView stateTextView;
     Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
-    String STRING_URL = "https://content.guardianapis.com/search?show-tags=contributor&api-key="+BuildConfig.GuardianAPI;
+    String STRING_URL = "https://content.guardianapis.com/search";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         initUI();
         checkInternet();
         fetchData();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.settingsMenu:{
+                        startActivity(new Intent(MainActivity.this,SettingActivity.class));
+
+                        item.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     //OVERRIDE FUNCTIONS
@@ -51,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             getLoaderManager().initLoader(0,null,this);
             return true;
         }
+        if(item.getItemId()==android.R.id.home){
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -58,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<ArrayList<NewsData>> onCreateLoader(int id, Bundle args) {
         progressBar.setVisibility(View.VISIBLE);
-        return new NewsLoader(MainActivity.this, STRING_URL);
+        return new NewsLoader(MainActivity.this, buildURL());
     }
 
     @Override
@@ -91,10 +120,31 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void initUI(){
         setContentView(R.layout.activity_main);
         pager = findViewById(R.id.viewPagerMain);
+        drawerLayout = findViewById(R.id.drawerLayoutMain);
+        navigationView = findViewById(R.id.navViewMain);
         progressBar = findViewById(R.id.progressBarMain);
         stateTextView = findViewById(R.id.noDataTextMain);
         toolbar = findViewById(R.id.toolbarMain);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+    }
+
+    private String buildURL(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String pageSize = sharedPreferences.getString(getString(R.string.page_size_key),getString(R.string.page_size_default));
+        String orderBy = sharedPreferences.getString(getString(R.string.order_by_key),getString(R.string.order_by_default));
+
+        Uri baseURI = Uri.parse(STRING_URL);
+        Uri.Builder builder = baseURI.buildUpon();
+
+        builder.appendQueryParameter("api-key",BuildConfig.GuardianAPI);
+        builder.appendQueryParameter("order-by",orderBy);
+        builder.appendQueryParameter("page-size",pageSize);
+        builder.appendQueryParameter("show-tags","contributor");
+
+        return builder.toString();
     }
 }

@@ -2,4 +2,16 @@
     <string name="app_name">NBuzz</string>
     <string name="checkinternet">Check Your Internet Connection</string>
     <string name="no_data_found">No Data Found,Please Refresh the App</string>
+    <string name="page_size_default">10</string>
+    <string name="page_size_key">page_size</string>
+    <string name="order_by_key">order_by</string>
+    <string name="order_by_default">newest</string>
+    <string-array name="orderEntries">
+        <item>Newest</item>
+        <item>Oldest</item>
+        <item>Relevance</item>
+    </string-array>
+    <string-array name="orderbyValues">
+
+    </string-array>
 </resources>

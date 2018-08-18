@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-
 public class CustomPagerAdapter extends PagerAdapter {
 
     private ArrayList<NewsData> dataArrayList;
@@ -51,9 +49,8 @@ public class CustomPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Uri website = Uri.parse(dataArrayList.get(position).getmURL());
-                Log.e("Intent", "Website Parsed");
-                Intent interntIntent = new Intent(Intent.ACTION_VIEW, website);
-                mContext.startActivity(interntIntent);
+                Intent internetIntent = new Intent(Intent.ACTION_VIEW, website);
+                mContext.startActivity(internetIntent);
             }
         });
         return mView;
