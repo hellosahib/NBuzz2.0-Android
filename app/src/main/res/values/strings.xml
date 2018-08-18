@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NBuzz</string>
+    <string name="checkinternet">Check Your Internet Connection</string>
+    <string name="no_data_found">No Data Found,Please Refresh the App</string>
+</resources>
