@@ -2,9 +2,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="Settings">
     <ListPreference
-        android:title="Order By"
-        android:entries="@array/orderEntries"
-        android:entryValues="@array/orderbyValues"
+        android:title="@string/orderbyTitle"
+        android:entries="@array/order_by_labels"
+        android:entryValues="@array/order_by_values"
         android:padding="16dp"
         android:key="@string/order_by_key"
         android:defaultValue="@string/order_by_default"

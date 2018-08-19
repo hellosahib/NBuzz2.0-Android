@@ -97,8 +97,13 @@ public class HttpHelper {
                 for (int i = 0; i < resultsObject.length(); i++) {
                     JSONObject result = resultsObject.getJSONObject(i);
                     JSONArray tagsObject = result.getJSONArray("tags");
-                    JSONObject tagZero = tagsObject.getJSONObject(0);
-                    String authorName = tagZero.getString("webTitle");
+                    String authorName;
+                    if(tagsObject.length()>0){
+                        JSONObject tagZero = tagsObject.getJSONObject(0);
+                         authorName = tagZero.getString("webTitle");
+                    }else{
+                        authorName = "Unnamed";
+                    }
                     arrayList.add(new NewsData(result.getString("webTitle"), result.getString("sectionName"), result.getString("webUrl"), result.getString("webPublicationDate"),authorName));
                 }
             } catch (JSONException e) {

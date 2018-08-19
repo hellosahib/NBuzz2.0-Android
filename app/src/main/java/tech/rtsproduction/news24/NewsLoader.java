@@ -39,4 +39,6 @@ public class NewsLoader extends AsyncTaskLoader<ArrayList<NewsData>> {
         }
         return dataArrayList;
     }//END OF LOAD IN BACKGROUND
+
+
 }

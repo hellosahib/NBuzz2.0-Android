@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         initUI();
         checkInternet();
-        fetchData();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -61,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fetchData();
+    }
     //OVERRIDE FUNCTIONS
 
     //MENU OPTIONS METHOD
@@ -105,10 +109,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     //USER-DEFINED FUNCTIONS
-
     private void fetchData(){
-        getLoaderManager().initLoader(0, null, this);
+        getLoaderManager().restartLoader(0,null,this);
     }
+
     private void checkInternet(){
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -117,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             stateTextView.setText(R.string.checkinternet);
         }
     }
+
     private void initUI(){
         setContentView(R.layout.activity_main);
         pager = findViewById(R.id.viewPagerMain);
@@ -144,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         builder.appendQueryParameter("order-by",orderBy);
         builder.appendQueryParameter("page-size",pageSize);
         builder.appendQueryParameter("show-tags","contributor");
-
+        Log.e("URL",builder.toString());
         return builder.toString();
     }
 }
