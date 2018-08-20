@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group
-        android:checkableBehavior="single"
-        android:id="@+id/sectionMenu">
-        <item
-            android:title="Games"
-            android:id="@+id/gamesMenu"
-            android:icon="@drawable/ic_favorite_black"/>
-        <item
-            android:title="Sport"
-            android:id="@+id/sportMenu"
-            android:icon="@drawable/ic_favorite_black"/>
-        <item
-            android:title="Politics"
-            android:id="@+id/politicsMenu"
-            android:icon="@drawable/ic_favorite_black"/>
-        <item
-            android:title="Technology"
-            android:id="@+id/techMenu"
-            android:icon="@drawable/ic_favorite_black"/>
-        <item
-            android:title="Business"
-            android:id="@+id/businessMenu"
-            android:icon="@drawable/ic_favorite_black"/>
-    </group>
-    <group
-        android:id="@+id/settingSectionMenu"
-        android:checkableBehavior="single">
-        <item
-            android:title="Settings"
-            android:id="@+id/settingsMenu"
-            android:icon="@drawable/ic_settings_black"
-            />
-    </group>
-
+    <item android:title="@string/categories">
+        <menu>
+            <group
+                android:id="@+id/sectionMenu"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/gamesMenu"
+                    android:icon="@drawable/ic_games"
+                    android:title="@string/games" />
+                <item
+                    android:id="@+id/politicsMenu"
+                    android:icon="@drawable/ic_politics"
+                    android:title="@string/politics" />
+                <item
+                    android:id="@+id/techMenu"
+                    android:icon="@drawable/ic_tech"
+                    android:title="@string/technology" />
+                <item
+                    android:id="@+id/businessMenu"
+                    android:icon="@drawable/ic_business"
+                    android:title="@string/business" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="@string/preferences">
+        <menu>
+            <group
+                android:id="@+id/settingSectionMenu"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/settingsMenu"
+                    android:icon="@drawable/ic_settings_black"
+                    android:title="@string/settings" />
+            </group>
+        </menu>
+    </item>
 </menu>

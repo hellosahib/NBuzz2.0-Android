@@ -22,4 +22,17 @@
         <item>relevance</item>
     </string-array>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="games">Games</string>
+    <string name="politics">Politics</string>
+    <string name="technology">Technology</string>
+    <string name="business">Business</string>
+    <string name="settings">Settings</string>
+    <string name="categories">Categories</string>
+    <string name="preferences">Preferences</string>
+    <string name="welcome_to_nbuzz_app">Welcome To NBuzz App</string>
+    <string name="ending_note"><![CDATA[Made With ❣️ By RTS Production <;>]]></string>
+    <string name="refresh">Refresh</string>
+
 </resources>

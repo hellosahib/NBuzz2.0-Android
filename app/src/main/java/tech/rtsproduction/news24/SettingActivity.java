@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import java.util.prefs.PreferenceChangeListener;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -19,8 +18,9 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
                 return true;
             }
         }
@@ -31,15 +31,13 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
         toolbar = findViewById(R.id.toolbarSetting);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
     }
 
-    public static class NewsPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener{
+    public static class NewsPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,11 +50,11 @@ public class SettingActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(orderBy);
         }
 
-        private void bindPreferenceSummaryToValue(Preference preference){
+        private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
-            String value = sharedPreferences.getString(preference.getKey(),"10");
-            onPreferenceChange(preference,value);
+            String value = sharedPreferences.getString(preference.getKey(), "10");
+            onPreferenceChange(preference, value);
         }
 
         @Override

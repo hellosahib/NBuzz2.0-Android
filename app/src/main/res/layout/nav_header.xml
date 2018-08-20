@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="192dp"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/backgroundMain"
+    android:gravity="bottom">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_to_nbuzz_app"
+        android:textColor="@color/whiteColor"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ending_note"
+        android:textColor="@color/whiteColor"
+        android:textSize="16sp"
+        android:layout_margin="16dp"/>
+
+</LinearLayout>
