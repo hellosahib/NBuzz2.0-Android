@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initUI();
-        checkInternet();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -53,22 +52,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         return true;
                     }
                     case R.id.businessMenu: {
-                        sectionName = "business";
+                        sectionName = getString(R.string.section1);
                         fetchData();
                         return true;
                     }
                     case R.id.gamesMenu: {
-                        sectionName = "games";
+                        sectionName = getString(R.string.section2);
                         fetchData();
                         return true;
                     }
                     case R.id.politicsMenu: {
-                        sectionName = "politics";
+                        sectionName = getString(R.string.section3);
                         fetchData();
                         return true;
                     }
                     case R.id.techMenu: {
-                        sectionName = "technology";
+                        sectionName = getString(R.string.section4);
                         fetchData();
                         return true;
                     }
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.refreshMenu) {
-            getLoaderManager().initLoader(0, null, this);
+            getLoaderManager().restartLoader(0,null,this);
             return true;
         }
         if (item.getItemId() == android.R.id.home) {
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<ArrayList<NewsData>> loader, ArrayList<NewsData> data) {
         progressBar.setVisibility(View.GONE);
-        if (data.size() == 0) {
+        if (data == null||data.size() == 0 ) {
             stateTextView.setVisibility(View.VISIBLE);
         }
         pager.setAdapter(new CustomPagerAdapter(MainActivity.this, data));
@@ -129,17 +128,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     //USER-DEFINED FUNCTIONS
     private void fetchData() {
-        sectionTextView.setText(sectionName);
-        getLoaderManager().restartLoader(0, null, this);
+        if(!checkInternet()){
+            sectionTextView.setText(sectionName);
+            getLoaderManager().restartLoader(0, null, this);
+        }
     }
 
-    private void checkInternet() {
+    private boolean checkInternet() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         boolean isConnected = networkInfo != null && networkInfo.isConnectedOrConnecting();
         if (!isConnected) {
             stateTextView.setText(R.string.checkinternet);
+            stateTextView.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            return true;
         }
+        return false;
     }
 
     private void initUI() {

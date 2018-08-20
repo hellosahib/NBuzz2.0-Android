@@ -7,11 +7,7 @@ public class NewsData {
     private String mURL;
     private String mDate;
     private String mAuthorName;
-
-    public NewsData() {
-        //Empty Constructor
-    }
-
+    
     public NewsData(String mTitle, String mSection, String mURL, String mDate,String mAuthorName) {
         this.mTitle = mTitle;
         this.mSection = mSection;

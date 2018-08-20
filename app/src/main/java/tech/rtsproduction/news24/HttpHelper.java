@@ -100,11 +100,11 @@ public class HttpHelper {
                     String authorName;
                     if(tagsObject.length()>0){
                         JSONObject tagZero = tagsObject.getJSONObject(0);
-                         authorName = tagZero.getString("webTitle");
+                         authorName = tagZero.optString("webTitle");
                     }else{
                         authorName = "Unnamed";
                     }
-                    arrayList.add(new NewsData(result.getString("webTitle"), result.getString("sectionName"), result.getString("webUrl"), result.getString("webPublicationDate"),authorName));
+                    arrayList.add(new NewsData(result.optString("webTitle"), result.optString("sectionName"), result.optString("webUrl"), result.optString("webPublicationDate"),authorName));
                 }
             } catch (JSONException e) {
                 Log.e("JSON Parsing", e.getLocalizedMessage());
