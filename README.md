@@ -1,11 +1,14 @@
-# NBuzz-Android
+# NBuzz 2.0 - Android
 #### An Android App For News
 ##### Made Under Udacity Android Basics Nanodegree 
 
-This App Uses Guardian API To Fetch News And Display To You 
-###### -> The Main Tagline Of News
-###### -> Section Releated To
-###### -> Date of News
+This App Uses Guardian API To Fetch News And Its Main Highlights are
+###### -> Displays You The Main Tagline Of News
+###### -> Displays The Section News is Releated To
+###### -> Displays The Date of News
+###### -> Ability To Change Order By 
+###### -> Ability To Change News Count
+###### -> Ability To Select Categories For News
 
 ### To Open This Project
 
